@@ -17,8 +17,6 @@ jobs:
         run: mvn test
       - name: Download jar's file from previous Job
         uses: actions/download-artifact@v1
-        with:
-          name: target
       - name: Generate the dev's tag
         run: echo ::set-output name=tag::dev-$(date +'%d%m%Y')
         id: project  
