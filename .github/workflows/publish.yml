@@ -17,12 +17,9 @@ jobs:
         run: mvn test
       - name: Download jar's file from previous Job
         uses: actions/download-artifact@v3
-      - name: Generate the dev's tag
-        run: echo ::set-output name=tag::dev-$(date +'%d%m%Y')
-        id: project  
       - name: Generate Docker image
-        run: mvn spring-boot:build-image -DskipTests -Dspring-boot.build-image.imageName=${{ secrets.DOCKERHUB_USERNAME }}/items:${{ steps.project.output.tag }}
+        run: mvn spring-boot:build-image -DskipTests -Dspring-boot.build-image.imageName=${{ secrets.DOCKERHUB_USERNAME }}/items:fecha2
       - name: Login to DockerHub
         run: docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_TOKEN }}" 
       - name: Push image to DockerHub
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/items:${{ steps.project.output.tag }}
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/items:fecha2
